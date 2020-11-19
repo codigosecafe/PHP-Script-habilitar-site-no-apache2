@@ -80,10 +80,11 @@ class AmbCommand extends Command
 
         $arquivoExemplo =  PATH_STOPRAGE.'/exemple.conf';
 
-        dd($arquivoExemplo);
+       
 
         $fn = fopen( $arquivoExemplo  ,"r");
         $text = '';
+        dd($fn, $arquivoExemplo);
 
         while(!feof($fn))  {
             $linha = fgets($fn);

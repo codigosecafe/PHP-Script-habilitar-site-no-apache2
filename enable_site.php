@@ -16,7 +16,7 @@ use Symfony\Component\Console\Application;
 
 define("PATH_PROJECT",  __DIR__);
 define("PATH_STOPRAGE", PATH_PROJECT.'/storage');
-define("PATH_SITES_AVAILABLE", '/etc/apache2/sites-available/');
+define("PATH_SITES_AVAILABLE", '/etc/apache2/sites-available');
 
 
 $application = new Application();

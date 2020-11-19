@@ -91,18 +91,22 @@ class AmbCommand extends Command
             $text .= \str_replace([':hostname:', ':path_to_project:', ':name:'], [$hostName, $pathToProject, '\${APACHE_LOG_DIR}/'.$nameForFileConf], $linha);
         }
         fclose($fn);
-        $this->msg('- Gravando o arquivo');
-
+        \sleep(1);
+        $this->msg('- Gravando o arquivo: '.PATH_SITES_AVAILABLE.'/'.$nameForFileConf.'.conf');
         $this->exec_shell('echo "'.$text.'" > '.PATH_SITES_AVAILABLE.'/'.$nameForFileConf.'.conf' );
-        $this->msg('- Dando permicao do Apache');
+        \sleep(1);
+        $this->msg('- Dando permicao do Apache a pasta:'. $pathToProject);
         $this->exec_shell('chown -R www-data:www-data '. $pathToProject);
+        \sleep(1);
         $this->msg('- Regristando o site');
         $this->exec_shell('cd '.PATH_SITES_AVAILABLE.' && a2ensite '.$nameForFileConf );
+        \sleep(1);
         $this->msg('- Reiniciando o apache');
         $this->exec_shell('sudo service apache2 restart');
-        $this->msg('- Agora pode acessar:');
+        \sleep(1);
+        $this->msg('- Agora pode acessar:', 'magenta');
         $this->msg('- http://'.$hostName);
-        $this->msg('Obs: Caso seja um subdominio lembre de configurar ele, no meu caso eu uso a ');
+        $this->msg('Obs: Caso seja um subdominio lembre de configurar ele, no meu caso eu uso a ', 'yellow');
        
        
     }

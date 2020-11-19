@@ -14,7 +14,7 @@ use App\AmbCommand;
 use Symfony\Component\Console\Application;
 
 
-define("PATH_PROJECT",  dirname(__DIR__).'/srcript_config_apache');
+define("PATH_PROJECT",  __DIR__);
 define("PATH_STOPRAGE", PATH_PROJECT.'/storage');
 define("PATH_SITES_AVAILABLE", '/etc/apache2/sites-available/');
 

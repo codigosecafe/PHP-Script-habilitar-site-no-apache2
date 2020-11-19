@@ -1,0 +1,31 @@
+{
+    "name": "codigosecafe/php-script-habilitar-site-no-apache2",
+    "type": "project",
+    "license": "MIT",
+    "description": "Criar o arquivo .conf e abilita o site",
+    "authors": [
+        {
+            "name": "Claudio Alexssandro Lino",
+            "email": "codigosecafe@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^5.1",
+        "tightenco/collect": "^7.12"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require-dev": {
+        "mp091689/dump-die": "^1.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

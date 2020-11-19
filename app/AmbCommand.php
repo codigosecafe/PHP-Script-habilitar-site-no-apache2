@@ -70,7 +70,11 @@ class AmbCommand extends Command
 
         $this->createFile($hostName, $pathToProject, $nameForFileConf);
 
-
+        $output->writeln([
+            '<fg=blue>FINALIZANDO SCRIPT</>',
+            '============',
+            '',
+        ]);
         return Command::SUCCESS;
     }
 
@@ -106,7 +110,7 @@ class AmbCommand extends Command
         \sleep(1);
         $this->msg('- Agora pode acessar:', 'magenta');
         $this->msg('- http://'.$hostName);
-        $this->msg('Obs: Caso seja um subdominio lembre de configurar ele, no meu caso eu uso a ', 'yellow');
+       
        
        
     }

@@ -84,7 +84,6 @@ class AmbCommand extends Command
 
         $fn = fopen( $arquivoExemplo  ,"r");
         $text = '';
-        dd($fn, $arquivoExemplo);
 
         while(!feof($fn))  {
             $linha = fgets($fn);

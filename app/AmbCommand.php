@@ -78,7 +78,11 @@ class AmbCommand extends Command
     {
         $this->msg('- Carregando o arquivo de exemplo');
 
-        $fn = fopen( PATH_STOPRAGE.'/exemple.conf' ,"r");
+        $arquivoExemplo =  PATH_STOPRAGE.'/exemple.conf';
+
+        dd($arquivoExemplo);
+
+        $fn = fopen( $arquivoExemplo  ,"r");
         $text = '';
 
         while(!feof($fn))  {

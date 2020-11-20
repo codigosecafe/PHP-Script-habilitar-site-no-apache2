@@ -111,6 +111,8 @@ class AmbSSLCommand extends Command
         $this->msg('- Executando CERTBOT');
         $this->exec_shell('sudo certbot -d "'.$hostName.'"');
         \sleep(1);
+        $this->msg('- Reiniciando o apache novamente');
+        $this->exec_shell('sudo service apache2 restart');
        
        
        

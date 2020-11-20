@@ -11,6 +11,7 @@ require __DIR__.'/vendor/autoload.php';
 
 
 use App\AmbCommand;
+use App\AmbSSLCommand;
 use Symfony\Component\Console\Application;
 
 
@@ -21,4 +22,5 @@ define("PATH_SITES_AVAILABLE", '/etc/apache2/sites-available');
 
 $application = new Application();
 $application->add(new AmbCommand());
+$application->add(new AmbSSLCommand());
 $application->run();

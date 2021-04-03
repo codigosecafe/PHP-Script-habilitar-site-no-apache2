@@ -59,6 +59,25 @@ class AmbSSLCommand extends Command
             return Command::FAILURE;
         }
 
+
+        $question = new Question('Informe o PATH para o seu arquivo de certificado .pem ', 'nao_informado');
+
+        $pathToCertificatePem = $helper->ask($input, $output, $question);
+
+        if($pathToCertificatePem == 'nao_informado'){
+            $this->msg('- É Obrigatorio informar o path do seu certificado .pem', 'red', true);
+            return Command::FAILURE;
+        }
+
+        $question = new Question('Informe o PATH para o seu arquivo de certificado .key ', 'nao_informado');
+
+        $pathToCertificateKey = $helper->ask($input, $output, $question);
+
+        if($pathToCertificateKey == 'nao_informado'){
+            $this->msg('- É Obrigatorio informar o path do certificado .key', 'red', true);
+            return Command::FAILURE;
+        }
+
         $question = new Question('Para finalizar informe o nome para o arquivo .conf ex.: (meu_site) = ', 'nao_informado');
 
         $nameForFileConf = $helper->ask($input, $output, $question);
@@ -92,7 +111,11 @@ class AmbSSLCommand extends Command
         while(!feof($fn))  {
             $linha = fgets($fn);
        
-            $text .= \str_replace([':hostname:', ':path_to_project:', ':name:'], [$hostName, $pathToProject, '\${APACHE_LOG_DIR}/'.$nameForFileConf], $linha);
+            $text .= \str_replace([
+                ':hostname:', ':path_to_project:', ':name:', ':path_to_certificate_file_pem:', ':path_to_certificate_file_key:'
+            ], [
+                $hostName, $pathToProject, '\${APACHE_LOG_DIR}/'.$nameForFileConf, $pathToCertificatePem, $pathToCertificateKey
+            ], $linha);
         }
         fclose($fn);
         \sleep(1);

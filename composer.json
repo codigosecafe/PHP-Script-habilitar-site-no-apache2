@@ -2,7 +2,7 @@
     "name": "codigosecafe/php-script-habilitar-site-no-apache2",
     "type": "project",
     "license": "MIT",
-    "description": "Criar o arquivo .conf e abilita o site",
+    "description": "Criar o arquivo .conf e habilita o site",
     "authors": [
         {
             "name": "Claudio Alexssandro Lino",

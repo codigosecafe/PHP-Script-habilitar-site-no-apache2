@@ -87,7 +87,7 @@ class AmbSSLCommand extends Command
             return Command::FAILURE;
         }
 
-        $this->createFile($hostName, $pathToProject, $nameForFileConf);
+        $this->createFile($hostName, $pathToProject, $nameForFileConf, $pathToCertificatePem, $pathToCertificateKey);
 
         $output->writeln([
             '<fg=blue>FINALIZANDO SCRIPT</>',
@@ -97,7 +97,7 @@ class AmbSSLCommand extends Command
         return Command::SUCCESS;
     }
 
-    public function createFile($hostName, $pathToProject, $nameForFileConf)
+    public function createFile($hostName, $pathToProject, $nameForFileConf, $pathToCertificatePem, $pathToCertificateKey)
     {
         $this->msg('- Carregando o arquivo de exemplo');
 

@@ -22,7 +22,7 @@ class AmbSSLCommand extends Command
     // ...
     protected function configure()
     {
-        $this->setDescription('Esse codigo cria um arquivo .conf na pasta /etc/apache2/sites-available/')
+        $this->setDescription('Esse codigo cria um arquivo .conf para acesso SSL na pasta /etc/apache2/sites-available/')
             ->setHelp('Cara ta na duvida ainda chama o Claudio que ele te ajuda');
     }
 
@@ -55,10 +55,9 @@ class AmbSSLCommand extends Command
         $pathToProject = $helper->ask($input, $output, $question);
 
         if($pathToProject == 'nao_informado'){
-            $this->msg('- É Obrigatorio informar o path do seu projeto', 'red', true);
+            $this->msg('- É Obrigatorio informar o path do seu projeto:', 'red', true);
             return Command::FAILURE;
         }
-
 
         $question = new Question('Informe o PATH para o seu arquivo de certificado .pem ', 'nao_informado');
 
@@ -103,19 +102,17 @@ class AmbSSLCommand extends Command
 
         $arquivoExemplo =  PATH_STOPRAGE.'/exempleSll.conf';
 
-       
-
         $fn = fopen( $arquivoExemplo  ,"r");
         $text = '';
 
         while(!feof($fn))  {
             $linha = fgets($fn);
        
-            $text .= \str_replace([
-                ':hostname:', ':path_to_project:', ':name:', ':path_to_certificate_file_pem:', ':path_to_certificate_file_key:'
-            ], [
-                $hostName, $pathToProject, '\${APACHE_LOG_DIR}/'.$nameForFileConf, $pathToCertificatePem, $pathToCertificateKey
-            ], $linha);
+            $text .= \str_replace(
+                [':hostname:', ':path_to_project:', ':name:',':path_to_certificate_file_pem:', ':path_to_certificate_file_key:'], 
+                [$hostName, $pathToProject, '\${APACHE_LOG_DIR}/'.$nameForFileConf, $pathToCertificatePem, $pathToCertificateKey],
+                $linha
+            );
         }
         fclose($fn);
         \sleep(1);
@@ -131,13 +128,8 @@ class AmbSSLCommand extends Command
         $this->msg('- Reiniciando o apache');
         $this->exec_shell('sudo service apache2 restart');
         \sleep(1);
-        $this->msg('- Executando CERTBOT');
-        $this->exec_shell('sudo certbot -d "'.$hostName.'"');
-        \sleep(1);
-        $this->msg('- Reiniciando o apache novamente');
-        $this->exec_shell('sudo service apache2 restart');
-       
-       
+        $this->msg('- Agora pode acessar:', 'magenta');
+        $this->msg('- https://'.$hostName);
        
     }
 
